@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
+import { FallingLines } from  'react-loader-spinner'
 
 export default function Weather (props){
     const [weatherData, setWeatherData] = useState ({ready: false});
@@ -56,6 +57,11 @@ if (weatherData.ready) {
     )
  } else {
     search();
-    return "Loading...";
+    return <FallingLines
+    color="orange"
+    width="100"
+    visible={true}
+    ariaLabel='falling-lines-loading'
+  />;
 
 } }
