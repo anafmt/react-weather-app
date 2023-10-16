@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
-import { FallingLines } from  'react-loader-spinner'
+import { FallingLines } from  'react-loader-spinner';
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather (props){
     const [weatherData, setWeatherData] = useState ({ready: false});
     const [city, setCity] = useState (props.defaultCity)
 
     function handleResponse (response) {
-        console.log(response.data)
         setWeatherData({
             ready:true,
             temperature:response.data.temperature.current,
@@ -52,7 +52,8 @@ if (weatherData.ready) {
                 </div>
             </form>
             <WeatherInfo data={weatherData} />
-            
+            <br />
+            <WeatherForecast city={weatherData.city} />
         </div>
     )
  } else {
