@@ -17,6 +17,13 @@ export default function WeatherForecast (props) {
         setLoaded(true);
     }
 
+    function load () {
+        let apiKey = "da34a047131b20d5faab7d8tfo459827";
+        let city = props.city;
+        let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+        axios.get(apiUrl).then(handleResponse);
+    }
     
 
     if (loaded) {
@@ -30,6 +37,8 @@ export default function WeatherForecast (props) {
                                 <WeatherForecastDay day={dailyForecast} />
                             </div>
                              );
+                        } else {
+                            return null;
                         }     
                     })}
 
@@ -38,11 +47,7 @@ export default function WeatherForecast (props) {
         )
       
     } else {
-        let apiKey = "da34a047131b20d5faab7d8tfo459827";
-        let city = props.city;
-        let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
-
-        axios.get(apiUrl).then(handleResponse);
+        load();
 
         return null;
     }
